@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hani MEHAMSADJI — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="data.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0a0a0a,#0e0a16);color:#f5f5f5;overflow-x:hidden}
+
+/* ─── NOISE OVERLAY ─── */
+body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ─── CURSOR GLOW ─── */
+.cursor-glow{position:fixed;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,0.12) 0%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:0}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;width:100%;z-index:100;padding:1.2rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,0.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05)}
+nav .logo{font-weight:800;font-size:1.3rem;letter-spacing:-.5px;background:linear-gradient(135deg,#7882ff,#b978ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+nav .nav-links{display:flex;gap:2rem;list-style:none}
+nav .nav-links a{text-decoration:none;color:#a0a0a0;font-size:.85rem;font-weight:500;transition:color .3s;position:relative}
+nav .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:linear-gradient(90deg,#7882ff,#b978ff);transition:width .3s}
+nav .nav-links a:hover{color:#fff}
+nav .nav-links a:hover::after{width:100%}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2rem;position:relative;z-index:1}
+.hero-badge{display:inline-block;padding:.4rem 1.2rem;border-radius:100px;border:1px solid rgba(99,102,241,0.3);background:rgba(99,102,241,0.08);font-size:.75rem;font-weight:600;color:#7882ff;letter-spacing:.5px;margin-bottom:1.5rem;text-transform:uppercase}
+.hero h1{font-size:clamp(2.5rem,8vw,6rem);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:.8rem}
+.hero h1 .gradient{background:linear-gradient(135deg,#7882ff,#b978ff,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1 .outline{-webkit-text-stroke:2px rgba(255,255,255,0.8);-webkit-text-fill-color:transparent}
+.hero p{font-size:1.15rem;color:#888;max-width:600px;line-height:1.7;margin-bottom:2.5rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 2rem;border-radius:60px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .3s;cursor:pointer;border:none}
+.btn-primary{background:linear-gradient(135deg,#7882ff,#b978ff);color:#fff;box-shadow:0 4px 25px rgba(99,102,241,0.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 35px rgba(99,102,241,0.45)}
+.btn-outline{border:1.5px solid rgba(255,255,255,0.2);color:#fff;background:transparent}
+.btn-outline:hover{border-color:#7882ff;background:rgba(99,102,241,0.08)}
+.btn-disabled{background:rgba(255,255,255,0.05);color:#666;cursor:not-allowed;border:1px solid rgba(255,255,255,0.08);pointer-events:none}
+.scroll-indicator{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.3rem;color:#555;font-size:.7rem;text-transform:uppercase;letter-spacing:2px;animation:bounce 2s infinite}
+.scroll-indicator .mouse{width:20px;height:32px;border:2px solid #555;border-radius:12px;position:relative}
+.scroll-indicator .mouse::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:3px;height:8px;background:#7882ff;border-radius:3px;animation:scrollWheel 2s infinite}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+@keyframes scrollWheel{0%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(12px)}}
+
+/* ─── SECTION COMMON ─── */
+section{padding:6rem 2rem;position:relative;z-index:1}
+.section-label{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#7882ff;margin-bottom:.8rem;border:1px solid rgba(99,102,241,0.2);padding:.3rem 1rem;border-radius:100px}
+.section-title{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;letter-spacing:-1px;margin-bottom:1rem}
+.section-sub{color:#888;font-size:1rem;max-width:600px;line-height:1.7}
+.container{max-width:1100px;margin:0 auto}
+
+/* ─── ABOUT ─── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:3rem}
+.about-text p{color:#aaa;line-height:1.8;margin-bottom:1.2rem;font-size:.95rem}
+.skills{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem}
+.skill-tag{padding:.4rem 1rem;border-radius:100px;background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.15);font-size:.78rem;color:#b0b0b0;font-weight:500}
+.about-visual{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:1;background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(192,132,252,0.05));border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center}
+
+/* ─── PROJECTS ─── */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;margin-top:3rem}
+.project-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:20px;overflow:hidden;transition:all .4s;cursor:pointer}
+.project-card:hover{transform:translateY(-6px);border-color:rgba(99,102,241,0.25);box-shadow:0 20px 60px rgba(0,0,0,0.4)}
+.project-card .thumb{width:100%;aspect-ratio:16/10;overflow:hidden;background:#111;position:relative}
+.project-card .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.project-card:hover .thumb img{transform:scale(1.05)}
+.project-card .body{padding:1.5rem}
+.project-card .body h3{font-size:1.1rem;font-weight:700;margin-bottom:.3rem;letter-spacing:-.3px}
+.project-card .body .tag{font-size:.7rem;color:#7882ff;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem;display:block}
+.project-card .body p{color:#888;font-size:.85rem;line-height:1.6;margin-bottom:1rem}
+
+/* ─── VIDEO SHOWCASE ─── */
+.video-section{background:linear-gradient(180deg,transparent,rgba(99,102,241,0.03),transparent)}
+.videos-grid{display:flex;gap:1rem;margin-top:2rem;justify-content:center;flex-wrap:wrap}
+.video-item{flex:0 0 calc(33.33% - .7rem);max-width:340px}
+.video-wrapper{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.06);box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.video-wrapper video{width:100%;display:block}
+.video-meta{text-align:center;margin-top:.8rem}
+.video-meta h3{font-size:1rem;font-weight:700;margin-bottom:.3rem}
+.video-meta p{color:#888;font-size:.8rem}
+
+/* ─── GALLERY ─── */
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-top:2rem}
+.gallery-grid img{width:100%;display:block;border-radius:12px;border:1px solid rgba(255,255,255,0.06);cursor:pointer;transition:transform .3s, border-color .3s}
+.gallery-grid img:hover{transform:scale(1.02);border-color:rgba(99,102,241,0.3)}
+
+/* ─── LIGHTBOX ─── */
+.lightbox{display:none;position:fixed;z-index:9999;inset:0;background:rgba(0,0,0,0.92);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:2rem;cursor:pointer}
+.lightbox.active{display:flex}
+.lightbox-content{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+.lightbox-close{position:absolute;top:1.5rem;right:2rem;color:#fff;font-size:2.5rem;font-weight:300;cursor:pointer;transition:opacity .3s;line-height:1;z-index:10000}
+.lightbox-close:hover{opacity:.6}
+
+/* ─── CONTACT ─── */
+.contact{text-align:center}
+.contact-card{max-width:500px;margin:2.5rem auto 0;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:3rem 2rem}
+.contact-card .name{font-size:1.5rem;font-weight:800;margin-bottom:.2rem;background:linear-gradient(135deg,#7882ff,#b978ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.contact-card .role{color:#888;font-size:.85rem;margin-bottom:1.5rem}
+.contact-item{display:flex;align-items:center;justify-content:center;gap:.8rem;padding:.8rem 0;color:#ccc;font-size:1rem}
+.contact-item svg{width:20px;height:20px;stroke:#7882ff;flex-shrink:0}
+.contact-item a{color:#ccc;text-decoration:none;transition:color .3s}
+.contact-item a:hover{color:#fff}
+
+/* ─── FOOTER ─── */
+footer{padding:2rem;text-align:center;color:#444;font-size:.8rem;border-top:1px solid rgba(255,255,255,0.04);position:relative;z-index:1}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px){
+  nav{padding:1rem 1.2rem}
+  nav .nav-links{display:none}
+  .about-grid{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr}
+  .videos-grid{flex-direction:column;align-items:center}
+  section{padding:4rem 1.2rem}
+  .contact-card{padding:2rem 1.2rem}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">HM.</div>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#projects">Projets</a></li>
+    <li><a href="#video">Vidéos</a></li>
+    <li><a href="#gallery">Galerie</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Créatif &amp; Stratège Digital</div>
+  <h1>
+    <span class="outline">Hani</span><br>
+    <span class="gradient">MEHAMSADJI</span>
+  </h1>
+  <p>Marketing digital, design de miniatures YouTube, développement d'applications et création de contenu viral. Je transforme les idées en expériences digitales percutantes.</p>
+  <div class="hero-btns">
+    <a href="#projects" class="btn btn-primary">Voir mes projets &rarr;</a>
+    <a href="#contact" class="btn btn-outline">Me contacter</a>
+  </div>
+  <div class="scroll-indicator">
+    <div class="mouse"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">À propos</div>
+    <h2 class="section-title">Qui suis-je ?</h2>
+    <p class="section-sub">Passionné par le digital, je crée des expériences qui marquent les esprits.</p>
+    <div class="about-text" style="margin:2rem 0 0">
+      <p>Je m'appelle <strong>Hani MEHAMSADJI</strong>, créateur de contenu, designer de miniatures YouTube, monteur et développeur d'applications. Je crée des vidéos marketing percutantes pour des marques, et je réalise le montage de A à Z pour donner vie à chaque projet.</p>
+      <p>J'accompagne actuellement <strong>+20 créateurs</strong> dans l'optimisation de leurs miniatures YouTube via <strong>DVISION</strong>, et je développe <strong>Blex</strong>, une application en plein développement.</p>
+      <div class="skills">
+        <span class="skill-tag">Marketing Digital</span>
+        <span class="skill-tag">UI/UX Design</span>
+        <span class="skill-tag">Flutter / Dart</span>
+        <span class="skill-tag">Web Design</span>
+        <span class="skill-tag">YouTube Thumbnails</span>
+        <span class="skill-tag">Création de contenu</span>
+        <span class="skill-tag">Branding</span>
+        <span class="skill-tag">Video Editing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">Portfolio</div>
+    <h2 class="section-title">Mes projets</h2>
+    <p class="section-sub">Une sélection de mes réalisations les plus marquantes.</p>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="thumb">
+          <img src="assets/blex-thumb.png" alt="Blex App">
+      </div>
+        <div class="body">
+          <span class="tag">Flutter • UI/UX</span>
+          <h3>Blex — App en développement</h3>
+          <p>Application mobile en plein développement. Esthétique glassmorphique, expérience d'achat fluide et immersive conçue avec Flutter.</p>
+          <span class="btn btn-disabled">En cours</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="thumb">
+          <img src="assets/Gemini_Generated_Image_1tm6h61tm6h61tm6.png" alt="DVISION">
+        </div>
+        <div class="body">
+          <span class="tag">Design • YouTube</span>
+          <h3>DVISION — Miniatures YouTube</h3>
+          <p>Service de création de miniatures YouTube optimisées pour le CTR. +20 créateurs accompagnés, +200 miniatures créées en Algérie.</p>
+          <a href="https://hanimehamsdaji.github.io/DVISION/" class="btn btn-primary" target="_blank">Voir le site →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="thumb">
+          <img src="assets/my-second-big-project-in-davinci-v0-89spegr852ra1.png" alt="Montage Vidéo">
+        </div>
+        <div class="body">
+          <span class="tag">Montage • Post-production</span>
+          <h3>Montage Vidéo</h3>
+          <p>Montage professionnel de A à Z : vidéos virales, clips, contenu réseaux sociaux, étalonnage, sound design et effets. Chaque plan est pensé pour captiver.</p>
+          <a href="#video" class="btn btn-primary">Voir les vidéos →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="thumb">
+          <img src="assets/marketing-redes-sociales-2.jpg" alt="Vidéos Marketing">
+        </div>
+        <div class="body">
+          <span class="tag">Marketing • Brand Content</span>
+          <h3>Création de Vidéos Marketing</h3>
+          <p>Stratégie et production de vidéos publicitaires pour marques. Du concept au montage final, je crée des contenus qui convertissent et renforcent votre image.</p>
+          <a href="#video" class="btn btn-primary">Voir les vidéos →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO SHOWCASE -->
+<section id="video" class="video-section">
+  <div class="container">
+    <div class="section-label">Vidéos</div>
+    <h2 class="section-title">Montage vidéos et Marketing</h2>
+    <p class="section-sub">Vidéos virales et contenu engageant pour les réseaux sociaux.</p>
+    <div class="videos-grid" id="videoGrid"></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-label">Galerie</div>
+    <h2 class="section-title">Miniatures &amp; visuels</h2>
+    <p class="section-sub">Exemples de miniatures YouTube et designs réalisés.</p>
+    <div class="gallery-grid" id="galleryGrid"></div>
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+      <span class="lightbox-close">&times;</span>
+      <img class="lightbox-content" id="lightboxImg">
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Travaillons ensemble</h2>
+    <p class="section-sub">Discutons de votre projet. Contactez-moi directement.</p>
+    <div class="contact-card">
+      <div class="name">Hani MEHAMSADJI</div>
+      <div class="role">Créateur digital &amp; Stratège marketing</div>
+      <div style="margin:1.5rem 0;height:1px;background:linear-gradient(90deg,transparent,rgba(99,102,241,0.2),transparent)"></div>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:+213768434676">07 68 43 46 76</a>
+      </div>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:hanimehamsadji2004@gmail.com">hanimehamsadji2004@gmail.com</a>
+      </div>
+      <div class="contact-item" style="margin-top:.5rem;font-size:.85rem;color:#888">
+        📍 18 rue Edouard Leroy Béziers
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 Hani MEHAMSADJI — Tous droits réservés
+</footer>
+
+<script>
+// Cursor glow
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', (e) => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+
+// Render videos
+const videoGrid = document.getElementById('videoGrid');
+const projectThumbs = ['blex-thumb.png','Gemini_Generated_Image_1tm6h61tm6h61tm6.png','my-second-big-project-in-davinci-v0-89spegr852ra1.png','marketing-redes-sociales-2.jpg'];
+ASSETS_DATA.videos.forEach(v => {
+  const title = v.title.replace(/[_-]/g,' ').replace(/\s+/g,' ').trim();
+  const item = document.createElement('div');
+  item.className = 'video-item';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'video-wrapper';
+  const video = document.createElement('video');
+  video.controls = true;
+  const source = document.createElement('source');
+  source.src = 'assets/' + v.file;
+  const ext = v.file.split('.').pop().toLowerCase();
+  source.type = ext === 'mov' ? 'video/quicktime' : ext === 'webm' ? 'video/webm' : 'video/mp4';
+  video.appendChild(source);
+  wrapper.appendChild(video);
+  item.appendChild(wrapper);
+  const meta = document.createElement('div');
+  meta.className = 'video-meta';
+  const h3 = document.createElement('h3');
+  h3.textContent = title;
+  meta.appendChild(h3);
+  item.appendChild(meta);
+  videoGrid.appendChild(item);
+});
+
+// Render gallery
+const galleryGrid = document.getElementById('galleryGrid');
+ASSETS_DATA.images.filter(i => !projectThumbs.includes(i.file)).forEach(i => {
+  const img = document.createElement('img');
+  img.src = `assets/${i.file}`;
+  img.alt = i.alt;
+  img.onclick = function(){ openLightbox(this) };
+  galleryGrid.appendChild(img);
+});
+
+// Smooth reveal on scroll (after dynamic render)
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.project-card, .about-grid, .gallery-grid, .video-wrapper, .video-item, .contact-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity .7s ease, transform .7s ease';
+  observer.observe(el);
+});
+
+// Lightbox
+function openLightbox(img) {
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  lbImg.src = img.src;
+  lb.classList.add('active');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+
+// Particles
+const cvs = document.getElementById('particles');
+const ctx = cvs.getContext('2d');
+let pts = [];
+function resizeCanvas() { cvs.width = innerWidth; cvs.height = innerHeight }
+resizeCanvas();
+addEventListener('resize', resizeCanvas);
+class Particle {
+  constructor() { this.reset() }
+  reset() { this.x = Math.random() * cvs.width; this.y = Math.random() * cvs.height; this.size = Math.random() * 2 + 0.5; this.speedX = (Math.random() - 0.5) * 0.3; this.speedY = (Math.random() - 0.5) * 0.3; this.opacity = Math.random() * 0.4 + 0.1; this.hue = Math.random() * 60 + 230 }
+  update() { this.x += this.speedX; this.y += this.speedY; if (this.x < 0 || this.x > cvs.width || this.y < 0 || this.y > cvs.height) this.reset() }
+  draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = `hsla(${this.hue}, 70%, 70%, ${this.opacity})`; ctx.fill() }
+}
+for (let i = 0; i < 80; i++) pts.push(new Particle());
+function animateParticles() { ctx.clearRect(0, 0, cvs.width, cvs.height); pts.forEach(p => { p.update(); p.draw() }); requestAnimationFrame(animateParticles) }
+animateParticles();
+</script>
+
+</body>
+</html>
