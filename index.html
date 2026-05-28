@@ -6,7 +6,6 @@
 <title>Hani MEHAMSADJI — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="data.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -245,7 +244,74 @@ footer{padding:2rem;text-align:center;color:#444;font-size:.8rem;border-top:1px 
     <div class="section-label">Vidéos</div>
     <h2 class="section-title">Montage vidéos et Marketing</h2>
     <p class="section-sub">Vidéos virales et contenu engageant pour les réseaux sociaux.</p>
-    <div class="videos-grid" id="videoGrid"></div>
+    <div class="videos-grid">
+      <div class="video-item">
+        <div class="video-wrapper">
+          <video controls>
+            <source src="assets/mopizza-video.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-meta">
+          <h3>Turn it On ✅ Avec Mopizza 🍕</h3>
+          <p>Vidéo virale • TikTok / YouTube Shorts • Algérie 🇩🇿</p>
+        </div>
+      </div>
+      <div class="video-item">
+        <div class="video-wrapper">
+          <video controls>
+            <source src="assets/📍Mopizza kouba , demain a 18h.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-meta">
+          <h3>📍 Mopizza Kouba</h3>
+          <p>Promo • Pizza • Kouba • Alger 🇩🇿</p>
+        </div>
+      </div>
+      <div class="video-item">
+        <div class="video-wrapper">
+          <video controls>
+            <source src="assets/Welcome to Caractere -Vêtements personnalisés & textile pour entreprises.Broderie • DTF • Unifor.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-meta">
+          <h3>Welcome to Caractère</h3>
+          <p>Vêtements personnalisés • Broderie • DTF • Unifor</p>
+        </div>
+      </div>
+      <div class="video-item">
+        <div class="video-wrapper">
+          <video controls>
+            <source src="assets/BAGGY JOGGER CARACTERE DISPONIBLE EN STOCK.Couleur noir et gris.Disponible en gros, prix en priv.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-meta">
+          <h3>Baggy Jogger Caractère</h3>
+          <p>Stock • Noir & Gris • Gros • Alger 🇩🇿</p>
+        </div>
+      </div>
+      <div class="video-item">
+        <div class="video-wrapper">
+          <video controls>
+            <source src="assets/📸Filtre neewer 72MM HD bleu streak special effect lens filre prix 8500da💸💸Filtre neewer 40,5M.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-meta">
+          <h3>Filtre Neewer 72MM</h3>
+          <p>Effet bleu streak • 8500 DA • Algérie 🇩🇿</p>
+        </div>
+      </div>
+      <div class="video-item">
+        <div class="video-wrapper">
+          <video controls>
+            <source src="assets/☎️📞( 0540905207 - 0793787427 Appelez ou contactez(whatsapp-Viber)🚚🏍️ Livraison disponible 58 .mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-meta">
+          <h3>IPAD</h3>
+          <p>Renooh dz • Alger 🇩🇿</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -255,7 +321,20 @@ footer{padding:2rem;text-align:center;color:#444;font-size:.8rem;border-top:1px 
     <div class="section-label">Galerie</div>
     <h2 class="section-title">Miniatures &amp; visuels</h2>
     <p class="section-sub">Exemples de miniatures YouTube et designs réalisés.</p>
-    <div class="gallery-grid" id="galleryGrid"></div>
+    <div class="gallery-grid">
+      <img src="assets/dvision-example3.jpg" alt="Miniature 3" onclick="openLightbox(this)">
+      <img src="assets/dvision-thumb1.jpg" alt="Miniature 4" onclick="openLightbox(this)">
+      <img src="assets/dvision-thumb2.jpg" alt="Miniature 5" onclick="openLightbox(this)">
+      <img src="assets/638496011_1277250624319488_6580602732079199111_n.png" alt="Design 1" onclick="openLightbox(this)">
+      <img src="assets/706416874_1317705180310587_8948274976665708385_n.jpg" alt="Design 2" onclick="openLightbox(this)">
+      <img src="assets/617537624_894226526662858_7940376398332216471_n.jpg" alt="Design 3" onclick="openLightbox(this)">
+      <img src="assets/1000-da-amix.jpg" alt="1000 DA Amix" onclick="openLightbox(this)">
+      <img src="assets/jad-senhaji.jpg" alt="JAD SENHAJI" onclick="openLightbox(this)">
+      <img src="assets/wach-la-suite-1.jpg" alt="Wach la suite" onclick="openLightbox(this)">
+      <img src="assets/Nitsu Mes Rêves.png" alt="Nitsu Mes Rêves" onclick="openLightbox(this)">
+      <img src="assets/Pierre Gasly Miniature.jpg" alt="Pierre Gasly" onclick="openLightbox(this)">
+      <img src="assets/Miniature Sacha.jpg" alt="Miniature Sacha" onclick="openLightbox(this)">
+    </div>
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
       <span class="lightbox-close">&times;</span>
       <img class="lightbox-content" id="lightboxImg">
@@ -301,44 +380,7 @@ document.addEventListener('mousemove', (e) => {
   glow.style.top = e.clientY + 'px';
 });
 
-// Render videos
-const videoGrid = document.getElementById('videoGrid');
-const projectThumbs = ['blex-thumb.png','Gemini_Generated_Image_1tm6h61tm6h61tm6.png','my-second-big-project-in-davinci-v0-89spegr852ra1.png','marketing-redes-sociales-2.jpg'];
-ASSETS_DATA.videos.forEach(v => {
-  const title = v.title.replace(/[_-]/g,' ').replace(/\s+/g,' ').trim();
-  const item = document.createElement('div');
-  item.className = 'video-item';
-  const wrapper = document.createElement('div');
-  wrapper.className = 'video-wrapper';
-  const video = document.createElement('video');
-  video.controls = true;
-  const source = document.createElement('source');
-  source.src = 'assets/' + v.file;
-  const ext = v.file.split('.').pop().toLowerCase();
-  source.type = ext === 'mov' ? 'video/quicktime' : ext === 'webm' ? 'video/webm' : 'video/mp4';
-  video.appendChild(source);
-  wrapper.appendChild(video);
-  item.appendChild(wrapper);
-  const meta = document.createElement('div');
-  meta.className = 'video-meta';
-  const h3 = document.createElement('h3');
-  h3.textContent = title;
-  meta.appendChild(h3);
-  item.appendChild(meta);
-  videoGrid.appendChild(item);
-});
-
-// Render gallery
-const galleryGrid = document.getElementById('galleryGrid');
-ASSETS_DATA.images.filter(i => !projectThumbs.includes(i.file)).forEach(i => {
-  const img = document.createElement('img');
-  img.src = `assets/${i.file}`;
-  img.alt = i.alt;
-  img.onclick = function(){ openLightbox(this) };
-  galleryGrid.appendChild(img);
-});
-
-// Smooth reveal on scroll (after dynamic render)
+// Smooth reveal on scroll
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -348,7 +390,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.project-card, .about-grid, .gallery-grid, .video-wrapper, .video-item, .contact-card').forEach(el => {
+document.querySelectorAll('.project-card, .about-grid, .gallery-grid, .video-wrapper, .contact-card').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(30px)';
   el.style.transition = 'opacity .7s ease, transform .7s ease';
@@ -367,20 +409,48 @@ function closeLightbox() {
 }
 
 // Particles
-const cvs = document.getElementById('particles');
-const ctx = cvs.getContext('2d');
-let pts = [];
-function resizeCanvas() { cvs.width = innerWidth; cvs.height = innerHeight }
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+}
 resizeCanvas();
 addEventListener('resize', resizeCanvas);
+
 class Particle {
   constructor() { this.reset() }
-  reset() { this.x = Math.random() * cvs.width; this.y = Math.random() * cvs.height; this.size = Math.random() * 2 + 0.5; this.speedX = (Math.random() - 0.5) * 0.3; this.speedY = (Math.random() - 0.5) * 0.3; this.opacity = Math.random() * 0.4 + 0.1; this.hue = Math.random() * 60 + 230 }
-  update() { this.x += this.speedX; this.y += this.speedY; if (this.x < 0 || this.x > cvs.width || this.y < 0 || this.y > cvs.height) this.reset() }
-  draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = `hsla(${this.hue}, 70%, 70%, ${this.opacity})`; ctx.fill() }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2 + 0.5;
+    this.speedX = (Math.random() - 0.5) * 0.3;
+    this.speedY = (Math.random() - 0.5) * 0.3;
+    this.opacity = Math.random() * 0.4 + 0.1;
+    this.hue = Math.random() * 60 + 230;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `hsla(${this.hue}, 70%, 70%, ${this.opacity})`;
+    ctx.fill();
+  }
 }
-for (let i = 0; i < 80; i++) pts.push(new Particle());
-function animateParticles() { ctx.clearRect(0, 0, cvs.width, cvs.height); pts.forEach(p => { p.update(); p.draw() }); requestAnimationFrame(animateParticles) }
+
+for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw() });
+  requestAnimationFrame(animateParticles);
+}
 animateParticles();
 </script>
 
